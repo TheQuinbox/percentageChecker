@@ -57,7 +57,6 @@ class JumpToDialog(wx.Dialog):
 	@classmethod
 	def run(cls, *args, **kwargs):
 		gui.mainFrame.prePopup()
-		d = cls(*args, **kwargs)
-		if d:
+		if d := cls(*args, **kwargs):
 			d.Show()
 		gui.mainFrame.postPopup()

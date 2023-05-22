@@ -81,7 +81,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	)
 	def script_reportOrJumpTo_speech(self, gesture):
 		if scriptHandler.getLastScriptRepeatCount() <= 1:
-			self.reportOrJumpTo(showJumpToDialog=bool(scriptHandler.getLastScriptRepeatCount() == 1))
+			self.reportOrJumpTo(
+				showJumpToDialog=scriptHandler.getLastScriptRepeatCount() == 1
+			)
 		return
 
 	@scriptHandler.script(
@@ -98,7 +100,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	)
 	def script_reportOrJumpTo_beep(self, gesture):
 		if scriptHandler.getLastScriptRepeatCount() <= 1:
-			self.reportOrJumpTo(showJumpToDialog=bool(scriptHandler.getLastScriptRepeatCount() == 1))
+			self.reportOrJumpTo(
+				showJumpToDialog=scriptHandler.getLastScriptRepeatCount() == 1
+			)
 		return
 
 	@scriptHandler.script(
@@ -252,11 +256,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			obj = treeInterceptor
 		try:
 			total = obj.makeTextInfo(textInfos.POSITION_ALL)
-		except (NotImplementedError, RuntimeError):
+		except RuntimeError:
 			raise RuntimeError("Invalid object")
 		try:
 			current = obj.makeTextInfo(textInfos.POSITION_CARET)
-		except (NotImplementedError, RuntimeError):
+		except RuntimeError:
 			# Translators: Announced when there is no caret in the currently focused control.
 			message(_("Caret not found"))
 			raise RuntimeError("Cannot work with object with no caret")
